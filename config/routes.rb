@@ -12,6 +12,7 @@ Dvra::Application.routes.draw do
     put 'products/:id' => 'products#update', :as => 'update_product'
     get 'products/delete/:id' => 'products#destroy', :as => 'destroy_product'
     post 'products/:product_id/reviews' => 'reviews#create', :as => 'product_reviews'
+    get 'gone' => 'products#gone', :as => 'gone'
 
     # cart functions
     get 'cart' => 'cart#show', :as => 'cart'

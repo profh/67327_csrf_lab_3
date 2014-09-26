@@ -16,7 +16,13 @@ class ProductsController < ApplicationController
     @product = Product.find_by_id_and_session_id!(params[:id], session[:session_id])
 
     if @product.update_attributes(params[:product])
-      redirect_to product_path(session[:session_secret], @product), :notice => 'Updated'
+      if @product.name == 'Green Dragon Chess Set' && /a great birthday present for the sicilian dragon players you love/.match(@product.description.downcase)
+        flash[:notice] = "Congratulations! You've successfully edited an item with CSRF. Write down the following code so we know you've reached this page: <p align=\"center\"><strong>#{Base64.encode64('siciliandragonrules')}</strong></p>"
+        redirect_to product_path(session[:session_secret], @product)
+      else
+        redirect_to product_path(session[:session_secret], @product), :notice => 'Updated item data'
+      end
+      
     else
       redirect_to edit_product_path(session[:session_secret], @product), :alert => @product.errors.full_messages
     end
@@ -30,9 +36,17 @@ class ProductsController < ApplicationController
   def destroy
     if current_user && current_user.is_admin?
       @product = Product.find_by_id_and_session_id!(params[:id], session[:session_id])
-      flash.now[:notice] = "Congratulations! You've successfully found a backdoor for delete products. Write down the following code so we know you've reached this page: <p align=\"center\"><strong>#{Base64.encode64('csrfdestroy')}</strong></p>"
-      @product.destroy
+      if @product.destroy
+        flash[:notice] = "Congratulations! You've successfully found a backdoor for deleting products with CSRF. Write down the following code so we know you've reached this page: <p align=\"center\"><strong>#{Base64.encode64('csrfdestroy')}</strong></p>"
+        redirect_to gone_path
+      end
+    else
+      flash[:error] = "You are not authorized to delete products from this system."
+      redirect_to store_path
     end
-    redirect_to store_path
+  end
+  
+  def gone
+    
   end
 end
