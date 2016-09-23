@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'faker'
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.22'
 gem 'rake'
 gem 'sqlite3'
 gem 'will_paginate'

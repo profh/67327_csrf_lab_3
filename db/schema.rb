@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.string   "name"
     t.string   "code"
     t.integer  "display_order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "categories", ["code"], :name => "index_categories_on_code"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
   create_table "mailing_lists", :force => true do |t|
     t.string   "session_id"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "mailing_lists", ["email"], :name => "index_mailing_lists_on_email"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.integer  "product_id"
     t.float    "price"
     t.integer  "quantity"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "order_line_items", ["order_id"], :name => "index_order_line_items_on_order_id"
@@ -67,8 +67,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.float    "total"
     t.integer  "billing_address_id"
     t.integer  "shipping_address_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   add_index "orders", ["billing_address_id"], :name => "index_orders_on_billing_address_id"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.text     "description"
     t.decimal  "price"
     t.boolean  "is_active",   :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "products", ["session_id"], :name => "index_products_on_session_id"
@@ -96,8 +96,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.integer  "product_id"
     t.integer  "user_id"
     t.text     "review"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "reviews", ["product_id"], :name => "index_reviews_on_product_id"
@@ -115,8 +115,8 @@ ActiveRecord::Schema.define(:version => 20110506134535) do
     t.boolean  "is_admin",         :default => false
     t.boolean  "is_active",        :default => false
     t.string   "changer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   add_index "users", ["registration_key"], :name => "index_users_on_registration_key"
